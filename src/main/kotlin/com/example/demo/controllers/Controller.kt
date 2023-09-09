@@ -1,20 +1,18 @@
-package com.example.demo.controllers
+package com.example.messagingstompwebsocket
 
 import com.example.demo.models.Message
-import com.fasterxml.jackson.databind.util.JSONPObject
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.stereotype.Controller
-import org.springframework.web.bind.annotation.GetMapping
-
+import org.springframework.web.util.HtmlUtils
 
 @Controller
 class Controller {
-
-    @MessageMapping("/sendDataToUser")
-    @SendTo("topic/getData")
-    public fun receiveData(message : Message) : Message{
-        return  message
+    @MessageMapping("/hello")
+    @SendTo("/topic/getData")
+    @Throws(Exception::class)
+    fun getData(message: Message): Message {
+        Thread.sleep(1000) // simulated delay
+        return Message(message.id,HtmlUtils.htmlEscape(message.data))
     }
-
 }
