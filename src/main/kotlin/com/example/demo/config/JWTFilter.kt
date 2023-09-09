@@ -48,7 +48,7 @@ class JWTFilter(private val util : JWTUtil,private val userDetailsService: Custo
 
         }
         else{
-            response.sendError(HttpServletResponse.SC_BAD_GATEWAY)
+            response.sendError(HttpServletResponse.SC_NOT_FOUND)
         }
         filterChain.doFilter(request,response)
 

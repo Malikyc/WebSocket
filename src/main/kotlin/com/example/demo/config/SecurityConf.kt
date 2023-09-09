@@ -22,7 +22,7 @@ class SecurityConf(private val filter : JWTFilter) {
     public fun securityFilterChain(http : HttpSecurity) : SecurityFilterChain{
        return http.csrf{csrf -> csrf.disable()}
            .sessionManagement{session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)}
-            .authorizeHttpRequests{requets -> requets.requestMatchers("")
+            .authorizeHttpRequests{requests -> requests.requestMatchers("/*")
                 .permitAll().anyRequest().authenticated()}.
            addFilterBefore(filter,UsernamePasswordAuthenticationFilter::class.java).build()
     }
