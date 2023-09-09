@@ -10,9 +10,7 @@ import org.springframework.web.util.HtmlUtils
 class Controller {
     @MessageMapping("/hello")
     @SendTo("/topic/getData")
-    @Throws(Exception::class)
     fun getData(message: Message): Message {
-        Thread.sleep(1000) // simulated delay
-        return Message(message.id,HtmlUtils.htmlEscape(message.data))
+        return Message(HtmlUtils.htmlEscape(message.data))
     }
 }
