@@ -16,16 +16,6 @@ class ServerWebSocketHandler : TextWebSocketHandler(){
         val sessions: MutableList<WebSocketSession> = ArrayList()
     }
 
-    @Scheduled(fixedRate = 1000)
-    @Throws(IOException::class)
-    fun sendPeriodicMessages() {
-        for (session : WebSocketSession in sessions) {
-            if (session.isOpen) {
-                val broadcast = "server periodic message " + LocalTime.now()
-                session.sendMessage(TextMessage(broadcast))
-            }
-        }
-    }
 
     override fun afterConnectionEstablished(session: WebSocketSession) {
         sessions.add(session)
